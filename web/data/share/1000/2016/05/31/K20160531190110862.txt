@@ -1,0 +1,287 @@
+0.9.7
+- Localization: strings has been updated.
+- Localization: added 'ruRU' translation.
+- MailUI: fixed errors.
+- Options: constructed new broker system.
+- Options: fixed an error that occurred whenever you deleted a reactive buff.
+- Options: auto work ordering has been deleted.
+- UnitFrames: class colors has changed slightly. 
+
+0.9.6
+- HotFix: adjusted code to reflect BNet API changes.
+- MailUI: slightly improved 'Open All' feature.
+- MailUI: fixed an issues which disabled the reply function.
+- MailUI: auto fills 'subject' for money mails.
+- MailUI: added new shortcut buttons to inbox mails.
+- PetBattleUI: fixed an annoying issue.
+- PlacementTool: buffs are now movable and no longer anchored to the minimap.
+
+0.9.5
+- Elements: integrated new drop down system.
+- Localization: added new strings.
+- PlacementTool: 'alerts' are now sorted dynamically.
+- PlacementTool: changed the default position of 'alerts'.
+- TalentUI: hopefully fixed some glyph issues.
+- TalentUI: missing glyphs can now be mouseovered for more info.
+
+0.9.4
+- AutoRepair: fixed an issue with guild bank repair.
+- Fonts: 'Century Gothic' has been added.
+- Localization: added support for chinese (traditional & taiwan).
+- Localization: added support for german.
+- MailUI: slightly changed 'open all' button appearance.
+- PlacementTool: 'loot frame' has been added.
+- PlacementTool: 'alerts' has been added.
+- RaidInfo: slightly improved tooltips for raid info elements.
+- Tooltip: fixed issues with disabled fonts.
+- UnitFrames: disabled spirit tracker for windwalker spec.
+
+0.9.3
+- MailUI: receiver drop down is now sorted by name.
+- MailUI: added a 0.25 sec loot threshold to prevent delay and error spam.
+
+0.9.2
+- Bags: changed menu icons.
+- BugFix: various.
+- New: mail ui has been redesigned.
+
+0.9.1
+- MoneyBroker: click function has been changed.
+- PlacementTool: default tooltip has been added (used by units and spells).
+- TalentUI: fixed talent 'unlock' for death knights.
+- Tooltips: slightly changed display of some tooltips.
+- UI-Scaling: fixed scaling for 2560x1440.
+
+0.9.0
+- BugFix: various minor fixes.
+- Minimap: updated button catching methods.
+- Misc: 'WorldStateCaptureBar' has been adjusted.
+- Options: added options for auto repairing to 'Misc'.
+- UI-Scaling: added scaling for 2560x1440.
+
+0.8.9
+- BugFix: incorrect player buff scaling.
+- BugFix: disappeared drag frame for 'Raid Frames'.
+- BugFix: support issues for 'XLoot'.
+- BugFix: empty quest reward tooltip icon.
+- BugFix: player status display within 'AFK & Flight Mode'.
+
+0.8.8
+- Auras: player buffs are now cancelable while in combat.
+- BugFixes: added missing ready check sound.
+- GroupControl: party and raid layouts have been merged together.
+- Minimap: garrison minimap button display fix.
+- Minimap: added new clipboard for minimap buttons.
+- Options: added option to enable/disable 'new' bag item display.
+- UI-Scale: added support for 16:10 aspect ratio.
+- UnitFrames: fixed range display for party (heal) and raid units.
+- UnitFrames: added sorting functionality for raid frames.
+- Unitframes: added 'Eternal Flame' & 'Sacred Shield' to raid buff filters.
+
+0.8.7
+- ActionBars: added some animations.
+- BugFixes: vehicle seat taint.
+- BugFixes: green texture bugs.
+- MoneyBroker: characters within connected realms of your current realm will also be displayed.
+- Options: new hotkey support for ESC-Menu switching (keyboard: arrow keys).
+- Options: menu switching and 'ESC' spamming has been disabled until slide animations are finished.
+- PlacementTool: vehicle seat has been added.
+
+0.8.6
+- Bags: has been revised, for better customization.
+- InfoBar: tooltip for addon memory usage has been enhanced.
+- MusicPlayer: has been disabled due to massive memory usage.
+- Options: added options for bag cleaning.
+- PlacementTool: fixed positioning bug for player's castbar.
+
+0.8.5
+- Bindings: new binding for the quest hub has been added.
+- Misc: Due to lack of need, the sidebar's toggle function has been removed.
+- Misc: Bugfixes.
+- Options: added option for disabling default objective tracker.
+- QuestHub: dungeon progress has been added.
+- UnitFrames: spirit bar has been added for windwalker monks.
+
+0.8.4
+- QuestHub: added bonus objectives for dungeons.
+- QuestHub: added bonus objective alert (blizzard).
+- QuestHub: fixed some taint around the hub.
+- UnitFrames: fixed castbar display for vehicles.
+
+0.8.3
+- AFK-Mode: fixed glyph animation properties.
+- AFK-Mode: afk mode will now be canceled automatically when entering combat.
+- Bags: item level display has been adjusted for upgradeable items.
+- Bugfixes: various.
+- MusicPlayer: added shuffle function.
+- MusicPlayer: minor improvements.
+- Options: added option for auto selling junk (disabled while using bag addons).
+- QuestHub: bonus objective tab has been added.
+- UnitFrames: arena frames are now shown even if the unit is invisible or in stealth.
+
+0.8.2.a
+- taint & error hotfix!
+
+0.8.2
+- Bags: money broker tooltip can now be cleaned up.
+- Chat: added scroll button.
+- InfoBar: bonus experience is now displayed.
+- Minimap: just another button fix, or not..(lol).
+- NamePlates: added castbar shield indicator.
+- Options: new options for unit frames has been added.
+- QuestHub: Due to lack of willingness, blizzard's quest tracker is deactivated again.
+- QuestHub: daily & weekly quest headers are displayed in blue.
+- QuestHub: failed quest criteria are displayed in red.
+- QuestHub: placeholder button has been added.
+- UnitFrames: blizzard raid frames can be enabled in the options.
+
+0.8.1 hotfix
+- AddOn-Support: Recount
+- Minimap: fixed some bugs (again).
+- QuestHub: POIs are now shown correctly.
+- QuestHub: fixed display for finished quests.
+- Tooltip: fixed bugs.
+
+0.8.0
+- Minimap: fixed issues with some addon.
+- Misc: minor fixes changes.
+- MusicPlayer: figured out, that tracks are affected by reverb if enabled.
+- QuestHub: fixed some minor issues.
+- QuestHub: each quest now has a tracking icon.
+- QuestHub: the quest counter will now be displayed while no quest item is active.
+- Tooltip: unit tooltips are now colored for easier reading.
+
+0.7.9
+- Bags: maximum height of the bag/bank frame has been raised.
+- Bindings: check out the new bindings tab for the UI.
+- Chat: is now auto hidden by entering AFK or Flight Mode.
+- Chat: can now be opened by pressing the "Open Chat"-hotkey ("ENTER") while hidden.
+- Minimap: disabled dungeon banners.
+- New: SyncPlayer has been added with full soundtrack playlists for Pandaria and Draenor (over 800 soundfiles).
+- Placement-Tool: QuestHub has been added.
+- QuestHub: a new hub for quests and achievements has been added.
+- Raidtool: raid lead info should now be displayed correctly after joining a group.
+- Raittool: raid info is now always hidden while doing pet battle.
+- Raidtool: added informative tooltip for the raid lead info.
+- Raidtool: lootmethod is now shown while no lootmaster is assigned.
+- Raidtool: world marker bar has been redesigned & added to the placement tool.
+- Tooltip: added player class icons to unit tooltips.
+
+0.7.8
+- AddOn-Support: Xloot
+- Bags: money information is now sorted by gold value per character.
+- Bags: the free slot value should now be displayed correctly.
+- Chat: fixed green texture bug.
+- Chat: a new font size can now be selected (10pt).
+- Chat: the default chat font is now replaced by the UI font.
+- Minimap: minor change for minimap button caching.
+- Nameplates: auras are now only shown for your target & mouseover or raid, party & arena units.
+- Nameplates: the aura changes are made, cause there are some errors in the unit tracking which lead to false aura ads.
+- Misc: new explanation tooltips has been added.
+- Raidtool: raid info frame is now also shown while in a party.
+- Raidtool: raid buffs are now correctly not displayed while doing petbattle.
+- Raidtool: fixed world marker buttons!
+- Tooltip: fixed background opacity for addon based tooltips.
+- UnitFrames: pvp icon has been added to the player frame.
+
+0.7.7
+- Chat: trade channel should now be working for each tab.
+- Chat: skada should now be displayed correctly while integrated.
+- GroupControl: new tokens for lead and master looter.
+- Misc: fixed a display bug with the challenge mode bar.
+- Nameplates: design has been cleaned up.
+- Nameplates: auto scaling has been added (experimental).
+- Nameplates: class color support for party / raid members.
+- Options: slightly improved the option panel 'Reactive Auras'.
+- Placement-Tool: reactive auras can now be repositioned.
+- Tooltips: fixed tooltip display bugs.
+- UnitFrames: changed the combat / resting indication (playerframe).
+- UnitFrames: redesigned the rarity indicator (target / focus frame).
+- UnitFrames: new: threat display bar (target frame).
+- UnitFrames: party frames are now enabled while in arena.
+- UnitFrames: heal frame buffs are now filtered by class.
+
+0.7.6
+- New Support: Quartz, Gnosis.
+- MinimapButtons: fixed catching (HandyNotes).
+- MinimapButtons: fixed false button behaviours before getting the garrison minimap button!
+- StanceButton: new indicators: Spectral Guise, Prowl
+
+0.7.5
+- BugFix: no Access to some major glyphs.
+- BugFix: taint from MultiCastActionBarFrame.
+- Misc: string changes.
+- MinimapButtons: more frequently button catching.
+- New Support: LiteBag, InfinityPlates.
+
+0.7.4.b
+- BugFix: nameplate issues (6.2.2 API-Changes).
+
+0.7.4.a
+- BugFix: false font usage for boss mod timers.
+
+0.7.4
+- Placement-Tool: A second profile has been added to reflect spec wise positioning.
+- Placement-Tool: The profiles are automatically loaded after switching specs.
+- Placement-Tool: Frame positions should no longer be randomly reset.
+- Placement-Tool: Ready Check Window has been added to the placement-tool.
+- UnitFrames: Raidframe layout "Compact" has been removed.
+- UnitFrames: The "Normal" layout has been redesigned in order to compensate the loss of the third.
+- UnitFrames: The # of raidframes has been increased to 40 (from 30).
+
+0.7.3
+- New: 'Placement-Tool' has been added, allowing you to move most parts of the UI.
+- BugFix: sorting bags might not be possible while using other bag addons.
+- Minimap: Garrison Minimap Button will now always be at the top position.
+- Misc: Draenor Zone Ability Button has been resized and is movable now.
+- TalentUI: Talents can be pulled out of the TalentUI while in combat now.
+
+0.7.2.a
+- fixed extra action button (again)
+
+0.7.2
+- Skin: Changed button mouseover textures.
+- Skin: ready check query.
+- Options: added debuff filtering for target & focus frame.
+- TalentUI: pet spec spells are now available (right-click).
+- TalentUI: Improved tooltips.
+- BugFix: incorrect role icon display for unit frames.
+
+0.7.1.a
+- fixed extra action button
+- fixed green textures for the bag bar.
+
+0.7.1
+- UnitFrames: Fixed a bug where arena casting bars were not displayed correctly.
+- UnitFrames: diminishing returns tracker has been removed from arena frames.
+- Textures: some textures has been merged.
+- Options: an option has been added to bind/unbind skada to the chat.
+- Minimap: fixed a bug where, after entering an instance, the dungeon difficulty was not displayed correctly.
+- ActionBars: the sidebar is now scrollable by the mouse wheel.
+- fixed tainting issues for action bars and the raid info frame.
+
+0.7.0.a
+- General: minor bug fixes.
+- ActionBars: restyled and merged the 'ExtraActionButton' with the locked button on the right side.
+- Bags: added support for inventorian.
+- Bags: addes 2 new categories for shipyard equipment and battle pet stuff.
+- Bags: hearthstone and garrison hearthstone are now always in the top two slots.
+- Bags: changed the sort order for the categories and some sorting behaviours slightly.
+- NamePlates: a percentage health display has been added.
+- Options: settings for raid control visibility and layout + sidebar toggle behaviour is now saved per character.
+- UnitFrames: added dispel border and reactive deff cd tracker to the heal layout.
+- UnitFrames: added specific totem buttons to the player frame (lightwell, statues, sef spirits, mushrooms)
+- UnitFrames: a heal layout has been added for party frames.
+- GroupControl: raid tool has been repositioned to the old spot.
+- GroupControl: the layout button bas been repositioned.
+
+0.7.0
+- Quests: the automatic acception of daily and weekly quests should now be correctly ignored, if not enabled.
+- General: code has been cleaned up.
+- General: various textures were compressed and combined.
+- CastBar: channel ticks have been revised to be more accurate.
+- TalentUI: fixed an issue that may cause the loss of glyphs in the slot selection.
+- TalentUI: glyphs can now be removed by right-clicking.
+- UnitFrames: a healer layout for the raid frames has been added.
+- RaidControl: has been merged into the upper left corner.
+- RaidControl: includes: raid frame toggle, the new layout menu and the raid tool.
