@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- 配置MultipartResolver 用于文件上传 使用spring的CommosMultipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8"
+          p:maxUploadSize="5400000"
+          p:uploadTempDir="data/temp">
+    </bean>
+
+    <bean id="wechatShareService" class="cn.shhuifu.analyse.service.impl.WechatShareServiceImpl">
+        <property name="wechatShareDao" ref="wechatShareDao"/>
+    </bean>
+    <bean id="wechatShareDao" class="cn.shhuifu.analyse.dao.impl.WechatShareDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="userService" class="cn.shhuifu.analyse.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="userDao" class="cn.shhuifu.analyse.dao.impl.UserDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="wechatMobileUserService" class="cn.shhuifu.analyse.service.impl.WechatMobileUserServiceImpl">
+        <property name="wechatMobileUserDao" ref="wechatMobileUserDao"/>
+    </bean>
+    <bean id="wechatMobileUserDao" class="cn.shhuifu.analyse.dao.impl.WechatMobileUserDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="wechatAccountService" class="cn.shhuifu.analyse.service.impl.WechatAccountServiceImpl">
+        <property name="wechatAccountDao" ref="wechatAccountDao"/>
+    </bean>
+    <bean id="wechatAccountDao" class="cn.shhuifu.analyse.dao.impl.WechatAccountDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="wechatShareHistoryService" class="cn.shhuifu.analyse.service.impl.WechatShareHistoryServiceImpl">
+        <property name="wechatShareHistoryDao" ref="wechatShareHistoryDao"/>
+    </bean>
+    <bean id="wechatShareHistoryDao" class="cn.shhuifu.analyse.dao.impl.WechatShareHistoryDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="wechatEmulateService" class="cn.shhuifu.analyse.service.impl.WechatEmulateServiceImpl">
+        <property name="wechatEmulateDao" ref="wechatEmulateDao"/>
+    </bean>
+    <bean id="wechatEmulateDao" class="cn.shhuifu.analyse.dao.impl.WechatEmulateDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="wechatComputerService" class="cn.shhuifu.analyse.service.impl.WechatComputerServiceImpl">
+        <property name="wechatComputerDao" ref="wechatComputerDao"/>
+    </bean>
+    <bean id="wechatComputerDao" class="cn.shhuifu.analyse.dao.impl.WechatComputerDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+
+    <bean id="appIdService" class="cn.shhuifu.analyse.service.impl.AdminApplicationServiceImpl">
+        <property name="adminApplicationDao" ref="appIdDao"/>
+    </bean>
+    <bean id="appIdDao" class="cn.shhuifu.analyse.dao.impl.AdminApplicationDaoImpl">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
+</beans>
