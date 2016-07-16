@@ -3,14 +3,13 @@ package cn.shhuifu.analyse.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-
 import sun.misc.BASE64Decoder;
 
 public class ImageHelp {
-    //对字节数组字符串进行Base64解码并生成图片
-    public static boolean GenerateImage(String path, String filename, String imgStr) {
+	//对字节数组字符串进行Base64解码并生成图片
+	public static boolean GenerateImage(String path, String filename, String imgStr) {
         if (imgStr == null) {
-            //图像数据为空
+        	//图像数据为空
             return false;
         }
         BASE64Decoder decoder = new BASE64Decoder();
@@ -25,8 +24,8 @@ public class ImageHelp {
             //生成图片
             String imgFilePath = path + filename;
             File file = new File(imgFilePath);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+            if(!file.getParentFile().exists()){
+            	file.getParentFile().mkdirs();
             }
             OutputStream out = new FileOutputStream(imgFilePath);
             out.write(b);

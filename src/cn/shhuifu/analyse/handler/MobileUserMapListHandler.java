@@ -19,7 +19,7 @@ public class MobileUserMapListHandler extends MapListHandler {
         int cols = rsmd.getColumnCount();
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnName(i);
-            if (columnName.equals("WEIXIN_VERIFY")) {
+            if (columnName.equals("WEIXIN_VERIFY") ) {
                 String weixin_verify_id = rs.getString(i).trim();
                 String weixin_verify_str = "";
                 /*
@@ -31,19 +31,19 @@ public class MobileUserMapListHandler extends MapListHandler {
                     case "8": weixin_verify_str = "微信帐号"; break;
                     case "9": weixin_verify_str = "没有申请"; break;
                 }*/
-                if ("0".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "未加队列";
-                } else if ("1".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "准备验证";
-                } else if ("2".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "正在验证";
-                } else if ("N".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "完成验证";
-                } else if ("8".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "微信帐号";
-                } else if ("9".equalsIgnoreCase(weixin_verify_id)) {
-                    weixin_verify_str = "没有申请";
-                }
+	            if ("0".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "未加队列";
+	            }else if ("1".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "准备验证";
+	            }else if ("2".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "正在验证";
+	            }else if ("N".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "完成验证";
+	            }else if ("8".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "微信帐号";
+	            }else if ("9".equalsIgnoreCase(weixin_verify_id)){
+	            	weixin_verify_str = "没有申请";
+	            }
 
                 result.put(rsmd.getColumnName(i), weixin_verify_str);
             } else {

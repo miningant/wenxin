@@ -22,74 +22,74 @@ import cn.shhuifu.analyse.util.ImageHelp;
 import cn.shhuifu.analyse.util.StringSpiltByByteHelp;
 
 public class WechatShareServiceImpl implements WechatShareService {
-    private WechatShareDao wechatShareDao;
+	private WechatShareDao wechatShareDao;
 
-    public void setWechatShareDao(WechatShareDao wechatShareDao) {
-        this.wechatShareDao = wechatShareDao;
-    }
+	public void setWechatShareDao(WechatShareDao wechatShareDao) {
+		this.wechatShareDao = wechatShareDao;
+	}
 
-    public void createShare(CswebTencentWeixinShareData cswebTencentWeixinShareData) throws Exception {
-        if (cswebTencentWeixinShareData.getShareTime() == null || cswebTencentWeixinShareData.getShareTime().equals("")) {
-            if (cswebTencentWeixinShareData.getShareStatus().equals("开始投放")) {
-                Calendar c = Calendar.getInstance();
-                c.add(Calendar.DAY_OF_MONTH, 1);
-                cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(c.getTime()));
-            }
-        } else {
-            try {
-                cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z").parse(cswebTencentWeixinShareData.getShareTime().replace("Z", " UTC"))));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+	public void createShare(CswebTencentWeixinShareData cswebTencentWeixinShareData) throws Exception {
+		if(cswebTencentWeixinShareData.getShareTime() == null || cswebTencentWeixinShareData.getShareTime().equals("")){
+			if(cswebTencentWeixinShareData.getShareStatus().equals("开始投放")){
+				Calendar c = Calendar.getInstance();
+				c.add(Calendar.DAY_OF_MONTH, 1);
+				cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(c.getTime()));
+			}
+		}else{
+				try {
+					cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z").parse(cswebTencentWeixinShareData.getShareTime().replace("Z", " UTC"))));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		Object[] params = new Object[21];
+		params[0] = cswebTencentWeixinShareData.getAppId();
+		params[1] = cswebTencentWeixinShareData.getShareStatus();
+		params[2] = cswebTencentWeixinShareData.getShareType();
+		params[3] = cswebTencentWeixinShareData.getShareUrl();
+		params[4] = cswebTencentWeixinShareData.getShareTitle().getBytes().length<30?cswebTencentWeixinShareData.getShareTitle():StringSpiltByByteHelp.subString(cswebTencentWeixinShareData.getShareTitle(), 30);
+		params[5] = cswebTencentWeixinShareData.getShareInfo01();
+		params[6] = cswebTencentWeixinShareData.getShareInfo02();
+		params[7] = cswebTencentWeixinShareData.getShareInfo03();
+		params[8] = cswebTencentWeixinShareData.getShareInfo04();
+		params[18] = cswebTencentWeixinShareData.getShareTime();
+		params[19] = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
+		params[20] = cswebTencentWeixinShareData.getCreateUser();
+		
+		String path = System.getProperty("wechatplatform.root")+"/";
+		for(int i=1;i<=9;i++){
+			Class<?> clazz = Class.forName("cn.shhuifu.analyse.beans.CswebTencentWeixinShareData");
+			String sharePic = (String) clazz.getMethod("getSharePic0"+String.valueOf(i)).invoke(cswebTencentWeixinShareData);
+			String sharePicBase64 = (String) clazz.getMethod("getSharePic0"+String.valueOf(i)+"Base64").invoke(cswebTencentWeixinShareData);
+			if(sharePic==null || sharePicBase64==null){
+				params[i+8] = null;
+				continue;
+			}
+			String filename = FileHelp.rename(FileHelp.fileExt(sharePic));
+			params[i+8] = filename;
+			ImageHelp.GenerateImage(path,filename,sharePicBase64.replace("data:image/png;base64,", ""));
+		}
+		
+		this.wechatShareDao.createShare(params);
+	}
 
-        Object[] params = new Object[21];
-        params[0] = cswebTencentWeixinShareData.getAppId();
-        params[1] = cswebTencentWeixinShareData.getShareStatus();
-        params[2] = cswebTencentWeixinShareData.getShareType();
-        params[3] = cswebTencentWeixinShareData.getShareUrl();
-        params[4] = cswebTencentWeixinShareData.getShareTitle().getBytes().length < 30 ? cswebTencentWeixinShareData.getShareTitle() : StringSpiltByByteHelp.subString(cswebTencentWeixinShareData.getShareTitle(), 30);
-        params[5] = cswebTencentWeixinShareData.getShareInfo01();
-        params[6] = cswebTencentWeixinShareData.getShareInfo02();
-        params[7] = cswebTencentWeixinShareData.getShareInfo03();
-        params[8] = cswebTencentWeixinShareData.getShareInfo04();
-        params[18] = cswebTencentWeixinShareData.getShareTime();
-        params[19] = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
-        params[20] = cswebTencentWeixinShareData.getCreateUser();
+	public List<HashMap<?, ?>> findShare(RequestParams requestParams) {
+		return this.wechatShareDao.findShare(requestParams);
+	}
 
-        String path = System.getProperty("wechatplatform.root") + "/";
-        for (int i = 1; i <= 9; i++) {
-            Class<?> clazz = Class.forName("cn.shhuifu.analyse.beans.CswebTencentWeixinShareData");
-            String sharePic = (String) clazz.getMethod("getSharePic0" + String.valueOf(i)).invoke(cswebTencentWeixinShareData);
-            String sharePicBase64 = (String) clazz.getMethod("getSharePic0" + String.valueOf(i) + "Base64").invoke(cswebTencentWeixinShareData);
-            if (sharePic == null || sharePicBase64 == null) {
-                params[i + 8] = null;
-                continue;
-            }
-            String filename = FileHelp.rename(FileHelp.fileExt(sharePic));
-            params[i + 8] = filename;
-            ImageHelp.GenerateImage(path, filename, sharePicBase64.replace("data:image/png;base64,", ""));
-        }
+	public void addComment(JSONObject params) throws Exception {
+		Object[] comment = {Integer.parseInt(params.get("shareCustId").toString()),params.get("comment"),params.get("createUserId"),new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date())};
+		this.wechatShareDao.addComment(comment);
+	}
 
-        this.wechatShareDao.createShare(params);
-    }
-
-    public List<HashMap<?, ?>> findShare(RequestParams requestParams) {
-        return this.wechatShareDao.findShare(requestParams);
-    }
-
-    public void addComment(JSONObject params) throws Exception {
-        Object[] comment = {Integer.parseInt(params.get("shareCustId").toString()), params.get("comment"), params.get("createUserId"), new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date())};
-        this.wechatShareDao.addComment(comment);
-    }
-
-    public void addAgree(JSONObject params) throws Exception {
-        Object[] agree = {Integer.parseInt(params.get("shareCustId").toString()), params.get("agree"), params.get("createUserId"), new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date()), Integer.parseInt(params.get("shareCustId").toString()), params.get("createUserId")};
-        this.wechatShareDao.addAgree(agree);
-    }
-
-    public void createShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) throws Exception {
-        Object[] params = new Object[21];
+	public void addAgree(JSONObject params) throws Exception {
+		Object[] agree = {Integer.parseInt(params.get("shareCustId").toString()),params.get("agree"),params.get("createUserId"),new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date()),Integer.parseInt(params.get("shareCustId").toString()),params.get("createUserId")};
+		this.wechatShareDao.addAgree(agree);
+	}
+	
+	public void createShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) throws Exception {
+		Object[] params = new Object[21];
         params[0] = cswebTencentWeixinShareDataEntity.getAppId();
         params[1] = cswebTencentWeixinShareDataEntity.getShareStatus();
         params[2] = cswebTencentWeixinShareDataEntity.getShareType();
@@ -120,73 +120,81 @@ public class WechatShareServiceImpl implements WechatShareService {
         this.wechatShareDao.createShare(params);
     }
 
-
-    @Override
-    public boolean reviewShare(JSONObject params) {
-        return this.wechatShareDao.reviewShare(params) == 0 ? false : true;
+    public List<HashMap<?, ?>> findShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) {
+        return this.wechatShareDao.findShare(cswebTencentWeixinShareDataEntity);
     }
 
     @Override
-    public void editShare(CswebTencentWeixinShareData cswebTencentWeixinShareData) throws Exception {
-        if (cswebTencentWeixinShareData.getShareTime() == null || cswebTencentWeixinShareData.getShareTime().equals("")) {
-            if (cswebTencentWeixinShareData.getShareStatus().equals("开始投放")) {
-                Calendar c = Calendar.getInstance();
-                c.add(Calendar.DAY_OF_MONTH, 1);
-                cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(c.getTime()));
-            }
-        } else {
-            try {
-                cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z").parse(cswebTencentWeixinShareData.getShareTime().replace("Z", " UTC"))));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        Object[] params = new Object[19];
-        params[0] = cswebTencentWeixinShareData.getShareStatus();
-        params[1] = cswebTencentWeixinShareData.getShareType();
-        params[2] = cswebTencentWeixinShareData.getShareUrl();
-        params[3] = cswebTencentWeixinShareData.getShareTitle().getBytes().length < 30 ? cswebTencentWeixinShareData.getShareTitle() : StringSpiltByByteHelp.subString(cswebTencentWeixinShareData.getShareTitle(), 30);
-        params[4] = cswebTencentWeixinShareData.getShareInfo01();
-        params[5] = cswebTencentWeixinShareData.getShareInfo02();
-        params[6] = cswebTencentWeixinShareData.getShareInfo03();
-        params[7] = cswebTencentWeixinShareData.getShareInfo04();
-        params[17] = cswebTencentWeixinShareData.getShareTime();
-        params[18] = cswebTencentWeixinShareData.getCustId();
-
-        String path = System.getProperty("wechatplatform.root") + "/";
-        for (int i = 1; i <= 9; i++) {
-            Class<?> clazz = Class.forName("cn.shhuifu.analyse.beans.CswebTencentWeixinShareData");
-            String sharePic = (String) clazz.getMethod("getSharePic0" + String.valueOf(i)).invoke(cswebTencentWeixinShareData);
-            String sharePicBase64 = (String) clazz.getMethod("getSharePic0" + String.valueOf(i) + "Base64").invoke(cswebTencentWeixinShareData);
-            if (sharePic == null || sharePicBase64 == null) {
-                params[i + 7] = null;
-                continue;
-            }
-            if (sharePicBase64.equals("LOCAL_IMAGE")) {
-                params[i + 7] = sharePic;
-            } else {
-                String filename = FileHelp.rename(FileHelp.fileExt(sharePic));
-                params[i + 7] = filename;
-                ImageHelp.GenerateImage(path, filename, sharePicBase64.replace("data:image/png;base64,", ""));
-            }
-        }
-
-        this.wechatShareDao.editShare(params);
+    public long find_total(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) {
+        return this.wechatShareDao.find_total(cswebTencentWeixinShareDataEntity);
     }
 
+	@Override
+	public boolean reviewShare(JSONObject params) {
+		return this.wechatShareDao.reviewShare(params)==0?false:true;
+	}
 
-    public void changeShareStatus(String status, String list) {
-        String[] custIds = list.split(",");
-        for (String custId : custIds) {
-            this.wechatShareDao.changeShareStatus(status, custId);
+	@Override
+	public void editShare(CswebTencentWeixinShareData cswebTencentWeixinShareData) throws Exception {
+		if(cswebTencentWeixinShareData.getShareTime() == null || cswebTencentWeixinShareData.getShareTime().equals("")){
+			if(cswebTencentWeixinShareData.getShareStatus().equals("开始投放")){
+				Calendar c = Calendar.getInstance();
+				c.add(Calendar.DAY_OF_MONTH, 1);
+				cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(c.getTime()));
+			}
+		}else{
+				try {
+					cswebTencentWeixinShareData.setShareTime(new SimpleDateFormat("YYYY-MM-dd HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z").parse(cswebTencentWeixinShareData.getShareTime().replace("Z", " UTC"))));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		Object[] params = new Object[19];
+		params[0] = cswebTencentWeixinShareData.getShareStatus();
+		params[1] = cswebTencentWeixinShareData.getShareType();
+		params[2] = cswebTencentWeixinShareData.getShareUrl();
+		params[3] = cswebTencentWeixinShareData.getShareTitle().getBytes().length<30?cswebTencentWeixinShareData.getShareTitle():StringSpiltByByteHelp.subString(cswebTencentWeixinShareData.getShareTitle(), 30);
+		params[4] = cswebTencentWeixinShareData.getShareInfo01();
+		params[5] = cswebTencentWeixinShareData.getShareInfo02();
+		params[6] = cswebTencentWeixinShareData.getShareInfo03();
+		params[7] = cswebTencentWeixinShareData.getShareInfo04();
+		params[17] = cswebTencentWeixinShareData.getShareTime();
+		params[18] = cswebTencentWeixinShareData.getCustId();
+		
+		String path = System.getProperty("wechatplatform.root")+"/";
+		for(int i=1;i<=9;i++){
+			Class<?> clazz = Class.forName("cn.shhuifu.analyse.beans.CswebTencentWeixinShareData");
+			String sharePic = (String) clazz.getMethod("getSharePic0"+String.valueOf(i)).invoke(cswebTencentWeixinShareData);
+			String sharePicBase64 = (String) clazz.getMethod("getSharePic0"+String.valueOf(i)+"Base64").invoke(cswebTencentWeixinShareData);
+			if(sharePic==null || sharePicBase64==null){
+				params[i+7] = null;
+				continue;
+			}
+			if(sharePicBase64.equals("LOCAL_IMAGE")){
+				params[i+7] = sharePic;
+			}else{
+				String filename = FileHelp.rename(FileHelp.fileExt(sharePic));
+				params[i+7] = filename;
+				ImageHelp.GenerateImage(path,filename,sharePicBase64.replace("data:image/png;base64,", ""));
+			}
+		}
+		
+		this.wechatShareDao.editShare(params);
+	}
+
+
+    public void changeShareStatus(String status,String list) {
+        String[] custIds=list.split(",");
+        for (String custId:custIds) {
+            this.wechatShareDao.changeShareStatus(status,custId);
         }
     }
 
     @Override
-    public void deleteShare(String list) throws Exception {
-        String[] custIds = list.split(",");
-        for (String custId : custIds) {
+    public void deleteShare(String list) throws Exception{
+        String[] custIds=list.split(",");
+        for (String custId:custIds) {
             this.wechatShareDao.deleteShare(custId);
         }
     }
@@ -246,20 +254,15 @@ public class WechatShareServiceImpl implements WechatShareService {
         this.wechatShareDao.editShare(params);
     }
 
-    @Override
-    public void deleteShareAgreeComment(int shareCustId) throws Exception {
-        this.wechatShareDao.deleteShare(shareCustId);
-        this.wechatShareDao.deleteAgree(shareCustId);
-        this.wechatShareDao.deleteComment(shareCustId);
-    }
+	@Override
+	public void deleteShareAgreeComment(int shareCustId) throws Exception {
+		this.wechatShareDao.deleteShare(shareCustId);
+		this.wechatShareDao.deleteAgree(shareCustId);
+		this.wechatShareDao.deleteComment(shareCustId);
+	}
 
-    @Override
-    public void deleteComment(int commentId) throws Exception {
-        this.wechatShareDao.deleteCommentById(commentId);
-    }
-
-    @Override
-    public long find_total(RequestParams requestParams) {
-        return this.wechatShareDao.find_total(requestParams);
-    }
+	@Override
+	public void deleteComment(int commentId) throws Exception {
+		this.wechatShareDao.deleteCommentById(commentId);
+	}
 }

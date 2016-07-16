@@ -5,7 +5,6 @@ import cn.shhuifu.analyse.dao.WechatMobileUserDao;
 import cn.shhuifu.analyse.util.DbutilsTemplate;
 import cn.shhuifu.analyse.handler.MobileUserMapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,9 +55,9 @@ public class WechatMobileUserDaoImpl implements WechatMobileUserDao {
     }
 
     @Override
-    public void create_mobile_user(Object[] params) throws Exception {
-        String sql = "INSERT INTO data_weixin_user.csweb_data_mobile_users (`APP_ID`, `PHONE_NO`, `USER_NAME`, `USER_SEX`, `USER_BIRTHDAY`, `USER_EMAIL`, `CITY_NODE_ID`, `USER_ADDRESS`, `ZIP_CODE`, `WEIXIN_VERIFY`, `UPDATE_TIME`, `CREATE_TIME`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        this.getDbutilsTemplate().update(sql, params);
+    public void create_mobile_user(Object[] params) throws Exception{
+        String sql="INSERT INTO data_weixin_user.csweb_data_mobile_users (`APP_ID`, `PHONE_NO`, `USER_NAME`, `USER_SEX`, `USER_BIRTHDAY`, `USER_EMAIL`, `CITY_NODE_ID`, `USER_ADDRESS`, `ZIP_CODE`, `WEIXIN_VERIFY`, `UPDATE_TIME`, `CREATE_TIME`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        this.getDbutilsTemplate().update(sql,params);
     }
 
     @Override

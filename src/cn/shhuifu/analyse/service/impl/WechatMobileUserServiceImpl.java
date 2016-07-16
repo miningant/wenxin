@@ -58,7 +58,7 @@ public class WechatMobileUserServiceImpl implements WechatMobileUserService {
         try {
             CsvReader csvReader = new CsvReader(new FileReader(new File(path)));
             Object[] params = new Object[12];
-            Integer[] unnullable = {0, 1, 3, 6, 9};
+            Integer[] unnullable={0,1,3,6,9};
             csvReader.readHeaders();
             while (csvReader.readRecord()) {
                 params[0] = csvReader.get("APP_ID");
@@ -74,15 +74,15 @@ public class WechatMobileUserServiceImpl implements WechatMobileUserService {
                 params[10] = csvReader.get("UPDATE_TIME");
                 params[11] = csvReader.get("CREATE_TIME");
 
-                for (Integer i : unnullable) {    //若必须不为空的column为空，返回false
+                for (Integer i:unnullable) {    //若必须不为空的column为空，返回false
                     if (params[i].toString().equals(""))
                         return false;
                 }
 
                 if (params[10].toString().equals(""))   //若时间column没有值，使用当前时间
-                    params[10] = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
+                    params[10]=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
                 if (params[11].toString().equals(""))
-                    params[11] = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
+                    params[11]=new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
 
                 for (int i = 0; i < params.length; i++) {
                     if (params[i].toString().equals("")) {

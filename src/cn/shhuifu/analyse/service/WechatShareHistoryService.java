@@ -10,5 +10,5 @@ public interface WechatShareHistoryService {
     public List<HashMap<?, ?>> find_share_history(CswebTencentWeixinShareHistoryEntity cswebTencentWeixinShareHistoryEntity);
 
     public long find_total(CswebTencentWeixinShareHistoryEntity cswebTencentWeixinShareHistoryEntity);
-
+    
 }

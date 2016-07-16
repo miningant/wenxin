@@ -30,8 +30,8 @@ public class ToolController {
     public ResponseEntity<byte[]> sendBack(HttpServletRequest httpServletRequest) throws IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "my-data.csv");
-        String data = httpServletRequest.getParameter("CSV_TEXT");
+        headers.setContentDispositionFormData("attachment","my-data.csv");
+        String data=httpServletRequest.getParameter("CSV_TEXT");
         return new ResponseEntity(data.getBytes(), headers, HttpStatus.CREATED);
     }
 }
