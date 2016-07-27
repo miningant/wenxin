@@ -13,12 +13,13 @@ public interface WechatShareDao {
 	public void addAgree(Object[] params);
 	public int reviewShare(JSONObject params);
 	public void editShare(Object[] params);
-	public List<HashMap<?, ?>> findShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity);
 	public void changeShareStatus(String status,String custId);
     public void deleteShare(String custId);
-    public long find_total(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity);
+	long find_total(RequestParams requestParams);
     public void deleteShare(int shareCustId);
     public void deleteAgree(int shareCustId);
     public void deleteComment(int shareCustId);
     public void deleteCommentById(int commentId);
+	List<HashMap<?,?>> getShareDataByShareTime(long timestamp);
+	List<HashMap<?,?>> getShareDataByShareTime(long timestamp,int page,int size);
 }

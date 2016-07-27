@@ -1,6 +1,7 @@
 package cn.shhuifu.analyse.beans;
 
 import javax.persistence.*;
+import java.io.UnsupportedEncodingException;
 
 @Entity
 @Table(name = "csweb_tencent_weixin_share_data", schema = "data_weixin_user", catalog = "")
@@ -61,11 +62,12 @@ public class CswebTencentWeixinShareDataEntity extends Params {
     @Basic
     @Column(name = "SHARE_TYPE", nullable = false, length = 8)
     public String getShareType() {
+
         return shareType;
     }
 
     public void setShareType(String shareType) {
-        this.shareType = shareType;
+            this.shareType = shareType;
     }
 
     @Basic

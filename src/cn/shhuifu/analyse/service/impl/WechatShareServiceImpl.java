@@ -28,6 +28,16 @@ public class WechatShareServiceImpl implements WechatShareService {
 		this.wechatShareDao = wechatShareDao;
 	}
 
+	@Override
+	public List<HashMap<?, ?>> getShareDataByShareTime(long timestamp) {
+		return wechatShareDao.getShareDataByShareTime(timestamp);
+	}
+
+	@Override
+	public List<HashMap<?, ?>> getShareDataByShareTime(long timestamp, int page, int size) {
+		return wechatShareDao.getShareDataByShareTime(timestamp,page,size);
+	}
+
 	public void createShare(CswebTencentWeixinShareData cswebTencentWeixinShareData) throws Exception {
 		if(cswebTencentWeixinShareData.getShareTime() == null || cswebTencentWeixinShareData.getShareTime().equals("")){
 			if(cswebTencentWeixinShareData.getShareStatus().equals("开始投放")){
@@ -120,14 +130,6 @@ public class WechatShareServiceImpl implements WechatShareService {
         this.wechatShareDao.createShare(params);
     }
 
-    public List<HashMap<?, ?>> findShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) {
-        return this.wechatShareDao.findShare(cswebTencentWeixinShareDataEntity);
-    }
-
-    @Override
-    public long find_total(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) {
-        return this.wechatShareDao.find_total(cswebTencentWeixinShareDataEntity);
-    }
 
 	@Override
 	public boolean reviewShare(JSONObject params) {
@@ -264,5 +266,10 @@ public class WechatShareServiceImpl implements WechatShareService {
 	@Override
 	public void deleteComment(int commentId) throws Exception {
 		this.wechatShareDao.deleteCommentById(commentId);
+	}
+
+	@Override
+	public long find_total(RequestParams requestParams) {
+		return this.wechatShareDao.find_total(requestParams);
 	}
 }

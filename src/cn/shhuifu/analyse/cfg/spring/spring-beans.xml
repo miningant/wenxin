@@ -64,5 +64,8 @@
     </bean>
     <bean id="appIdDao" class="cn.shhuifu.analyse.dao.impl.AdminApplicationDaoImpl">
         <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
-    </bean>	
+    </bean>
+    <bean id="auth" class="cn.shhuifu.analyse.filter.SimpleAuthFilter">
+        <property name="dbutilsTemplate" ref="dbutilsTemplate"/>
+    </bean>
 </beans>

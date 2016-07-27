@@ -58,7 +58,7 @@
 		<aop:advisor pointcut-ref="transactionPointCut"
 			advice-ref="txAdvice" />
 	</aop:config>
-	
+
 	<!-- 大字段 -->
 	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
 </beans>

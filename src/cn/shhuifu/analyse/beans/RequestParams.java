@@ -8,6 +8,9 @@ public class RequestParams {
 	private String shareStatus;
 	private String phoneNo;
 	private String weixinSignal;
+	private Integer custId;
+
+
 	private int page;
 	private int size;
 	public RequestParams() {
@@ -16,7 +19,7 @@ public class RequestParams {
 	}
 	public RequestParams(String nodeId, String appId, String createUser,
 			String shareType, String shareStatus, String phoneNo,
-			String weixinSignal, int page, int size) {
+			String weixinSignal,Integer custId, int page, int size) {
 		super();
 		this.nodeId = nodeId;
 		this.appId = appId;
@@ -25,6 +28,7 @@ public class RequestParams {
 		this.shareStatus = shareStatus;
 		this.phoneNo = phoneNo;
 		this.weixinSignal = weixinSignal;
+		this.custId=custId;
 		this.page = page;
 		this.size = size;
 	}
@@ -82,5 +86,13 @@ public class RequestParams {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	
+	public Integer getCustId() {
+		return custId;
+	}
+
+	public void setCustId(Integer custId) {
+		this.custId = custId;
+	}
+
+
 }

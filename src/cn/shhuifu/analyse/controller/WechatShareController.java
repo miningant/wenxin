@@ -10,13 +10,10 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +22,26 @@ import java.util.Map;
 @RequestMapping("/api")
 @Scope("prototype")
 public class WechatShareController {
-	private WechatShareService wechatShareService;
-	
-	@Autowired
-	public void setWechatShareService(
-			WechatShareService wechatShareService) {
-		this.wechatShareService = wechatShareService;
-	}
-	
+    @Autowired
+    private WechatShareService wechatShareService;
+
+
+    /**
+     * 获取当天发布朋友圈
+     * @return
+     */
+    @RequestMapping(value="/share/today", method= RequestMethod.GET)
+    @ResponseBody
+    public Map getShareDataByShareTime(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.MILLISECOND,0);
+        long timestamp=(long)(cal.getTimeInMillis()/1000);
+        List result =wechatShareService.getShareDataByShareTime(timestamp);
+        return ResMap.resultMap(result==null?ResMap.ERROR:ResMap.SUCCESS,result);
+    }
 	/**
 	 * 发朋友圈
 	 * @param cswebTencentWeixinShareData
@@ -63,7 +72,8 @@ public class WechatShareController {
 			return ResMap.resultMap(ResMap.ERROR, null);
 		}else{
 			List<HashMap<?, ?>> result = this.wechatShareService.findShare(requestParams);
-			return ResMap.resultMap(result==null?ResMap.ERROR:ResMap.SUCCESS, result);
+			long total=this.wechatShareService.find_total(requestParams);
+			return ResMap.resultMap(result==null?ResMap.ERROR:ResMap.SUCCESS, result,total);
 		}
 	}
 	
@@ -164,7 +174,7 @@ public class WechatShareController {
 	 */
 	@RequestMapping(value = "share/{shareCustId}/comment/{commentId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Object addComment(@PathVariable("commentId") int commentId) {
+	public Object deleteComment(@PathVariable("commentId") int commentId) {
 		try {
 			this.wechatShareService.deleteComment(commentId);
 			return ResMap.resultMap(ResMap.SUCCESS, null);
@@ -173,24 +183,6 @@ public class WechatShareController {
 			return ResMap.resultMap(ResMap.ERROR, null);
 		}
 	}
-
-	/**
-     * 分享数据查询
-     *
-     * @param cswebTencentWeixinShareDataEntity
-     * @return
-     */
-    @RequestMapping(value = "/sharenit", method = RequestMethod.GET)
-    @ResponseBody
-    public Map<?, ?> queryShares(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) {
-        if (cswebTencentWeixinShareDataEntity == null) {
-            return ResMap.resultMap(ResMap.ERROR, null);
-        } else {
-            List<HashMap<?, ?>> result = this.wechatShareService.findShare(cswebTencentWeixinShareDataEntity);
-            long total = this.wechatShareService.find_total(cswebTencentWeixinShareDataEntity);
-            return ResMap.resultMap(result == null ? ResMap.ERROR : ResMap.SUCCESS, result, total);
-        }
-    }
 
     /**
      * 分享数据添加
@@ -272,10 +264,9 @@ public class WechatShareController {
      */
     @RequestMapping(value = "/share_upload", method = RequestMethod.POST)
     @ResponseBody
-    public Map<?, ?> fileUpload(@RequestBody MultipartFile file) {
-        if (file == null) {
-            return ResMap.resultMap(ResMap.ERROR, "No file uploaded");
-        } else {
+    public Map<?, ?> fileUpload(@RequestParam("file") MultipartFile file) {
+        if (file == null) return ResMap.resultMap(ResMap.ERROR, "No file uploaded");
+		else {
             String result = wechatShareService.file_upload(file);  //返回路径
             if (result == null)
                 return ResMap.resultMap(ResMap.ERROR, "Failed to upload the file");

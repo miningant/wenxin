@@ -21,16 +21,14 @@ public interface WechatShareService {
 	public void deleteShareAgreeComment(int shareCustId) throws Exception;
     public void editShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) throws Exception;
     public void deleteComment(int commentId) throws Exception;
-	
+    long find_total(RequestParams requestParams);
     public void createShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity) throws Exception;
-
-    public List<HashMap<?, ?>> findShare(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity);
 
     public void changeShareStatus(String status,String list) throws Exception;
 
     public void deleteShare(String list) throws Exception;
 
-    public long find_total(CswebTencentWeixinShareDataEntity cswebTencentWeixinShareDataEntity);
-
     public String file_upload(MultipartFile file);
+    List<HashMap<?,?>>getShareDataByShareTime(long timestamp);
+    List<HashMap<?,?>> getShareDataByShareTime(long timestamp,int page,int size);
 }
